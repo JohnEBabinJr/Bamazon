@@ -16,10 +16,10 @@ connection.connect(function (err) {
 });
 
 
-displayProducts();
+updateDisplay();
 
 
-function displayProducts() {
+function updateDisplay() {
     var displayTable = new Table({
         head: ["Item ID", "Catergory", "Product Name", "Price", "Quantity"],
         colWidths: [8, 20, 20, 10, 8]
@@ -41,11 +41,11 @@ function displayProducts() {
         }
 
         console.log(displayTable.toString());
-        purchasePrompt();
+        purchase();
     });
 }
 
-function purchasePrompt() {
+function purchase() {
     inquirer
         .prompt([
             {
@@ -62,10 +62,10 @@ function purchasePrompt() {
             }
         ])
         .then(function (answers) {
-            purchaseOrder(answers.ID, answers.Quantity);
+            transaction(answers.ID, answers.Quantity);
         });
 
-    function purchaseOrder(ID, purchaseQuantity) {
+    function transaction(ID, purchaseQuantity) {
         connection.query("SELECT * FROM products WHERE id = ?", ID, function (
             err,
             res
@@ -107,7 +107,7 @@ function purchasePrompt() {
                     "to complete your order."
                 );
             }
-            displayProducts();
+            updateDisplay();
         });
     }
 }
