@@ -22,7 +22,7 @@ displayProducts();
 function displayProducts() {
     var displayTable = new Table({
         head: ["Item ID", "Catergory", "Product Name", "Price", "Quantity"],
-        colWidths: [10, 20, 20, 10, 10]
+        colWidths: [8, 20, 20, 10, 8]
     });
 
     connection.query("SELECT * FROM products", function (err, response) {
