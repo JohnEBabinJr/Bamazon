@@ -22,7 +22,7 @@ displayProducts();
 function displayProducts() {
     var displayTable = new Table({
         head: ["Item ID", "Catergory", "Product Name", "Price", "Quantity"],
-        colWidths: [10, 20, 20, 10, 10] 
+        colWidths: [10, 20, 20, 10, 10]
     });
 
     connection.query("SELECT * FROM products", function (err, response) {
@@ -39,7 +39,9 @@ function displayProducts() {
                 response[i].stock_quantity
             ]);
         }
-       purchasePrompt();
+
+        console.log(displayTable.toString());
+        purchasePrompt();
     });
 }
 
@@ -71,7 +73,7 @@ function purchasePrompt() {
             if (err) throw err;
             if (purchaseQuantity <= res[0].stock_quantity) {
                 var totalCost = res[0].price * purchaseQuantity;
-                console.log("Good news your order is in stock!");
+                console.log("Your order is in stock!");
                 console.log(
                     "Your total cost for " +
                     purchaseQuantity +
